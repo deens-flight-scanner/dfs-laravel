@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.top-div {
+    width: 1400px;
+    height: 60px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: darkslategray;
+
+    .top-text-left {
+        float: left;
+        margin-left: 20px;
+        color: white;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+
+    .top-text-right {
+        float: right;
+        margin-right: 20px;
+        color: white;
+        line-height: 30px;
+        text-transform: uppercase;
+    }
+}
+
+
+.content-div {
+    width: 1400px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left-div {
+    width: 30%;
+    float: left;
+
+    .search-form {
+        font-size: 15px;
+    }
+
+    #from-input {
+        width: 40%;
+    }
+
+    #to-input {
+        width: 40%;
+    }
+
+    #search-flights-button {
+        float: right;
+    }
+
+    table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+    
+        td, th {
+            // border: 1px solid #ddd;
+            padding: 8px;
+        }
+    
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+    
+        tr:hover {
+            background-color: #ddd;
+        }
+    
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    }
+}
+
+.left-suggestion {
+    min-height: 1px;
+    width: 40%;
+    float: left;
+}
+
+.right-suggestion {
+    min-height: 1px;
+    width: 40%;
+    float: left;
+}
+
+.right-div {
+    opacity: 20%;
+    width: 70%;
+    float: left;
+    background-color: #04AA6D;
+    height: 100vh;
+}
