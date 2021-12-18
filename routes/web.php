@@ -16,6 +16,8 @@ use App\Http\Controllers\AirportController;
 
 Route::get("/home", [AirportController::class, 'home']);
 
+Route::get("/searchFlights/{departure}", [AirportController::class, 'searchFlights']);
+
 
 Route::get('/', function () {
     return view('home');

@@ -27,28 +27,33 @@
 
             <table>
                 <thead>
-                    <th>Datum</th>
-                    <th>Tijd</th>
                     <th>Van</th>
                     <th>Naar</th>
+                    <th>Prijs</th>
+                    <th>Vetrek</th>
+                    <th>Terug</th>
                 </thead>
-                <tbody>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
-                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                <tbody id="table_flights_body">
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
+                    <tr><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td><td style="opacity: 0">/</td></tr>
                 </tbody>
             </table>
         </div>
