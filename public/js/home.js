@@ -87,7 +87,7 @@ function showFlightsInTable(data) {
 }
 
 function showDetailsOfFlight(departure, arrival) {
-    fetch("http://178.62.214.114:5000/calculate-co2?departure=" + departure + "&arrival=" + arrival)
+    fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure + "&arrival=" + arrival)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject(response);
