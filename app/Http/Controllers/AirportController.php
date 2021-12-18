@@ -45,10 +45,26 @@ class AirportController extends Controller
     /**
      * Geef laptops in de price-range
      */
-    public function searchFlights($departure)
+    public function searchFlights($airport, $budget, $depart, $return, $exactDates)
     {
-        $url = 'https://www.momondo.be/s/horizon/exploreapi/destinations?airport='.$departure.'&budget=&duration=&flightMaxStops=&stopsFilterActive=false&topRightLat=83.27442317147279&topRightLon=-120.61572565507146&bottomLeftLat=-69.66682820715249&bottomLeftLon=170.47802434492354&zoomLevel=1&selectedMarker=&themeCode=&selectedDestination=';
+        // $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+
+        if ($budget === 'none') {
+            $budget = '';
+        }
+        if ($depart === 'none') {
+            $depart = '';
+        }
+        if ($return === 'none') {
+            $return = '';
+        }
+        if ($exactDates === 'none') {
+            $exactDates = '';
+        } 
+        $url = 'https://www.momondo.com/s/horizon/exploreapi/destinations?airport='.$airport.'&budget='.$budget.'&depart='.$depart.'&return='.$return.'&duration=&exactDates='.$exactDates.'&flightMaxStops=&stopsFilterActive=false&topRightLat=85.05112899999995&topRightLon=-60.02727875000227&bottomLeftLat=-80.2979267198184&bottomLeftLon=68.99615875000114&zoomLevel=1&selectedMarker=&themeCode=&selectedDestination=';
+        // $url = 'https://www.momondo.com/s/horizon/exploreapi/destinations?airport='.$departure.'&budget='.$budget.'&duration=&flightMaxStops=&stopsFilterActive=false&topRightLat=83.27442317147279&topRightLon=-120.61572565507146&bottomLeftLat=-69.66682820715249&bottomLeftLon=170.47802434492354&zoomLevel=1&selectedMarker=&themeCode=&selectedDestination=';
     
+        // $output->writeln($url);  
         $client = new \GuzzleHttp\Client();
         
         // Create a request

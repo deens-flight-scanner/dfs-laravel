@@ -16,7 +16,7 @@ use App\Http\Controllers\AirportController;
 
 Route::get("/home", [AirportController::class, 'home']);
 
-Route::get("/searchFlights/{departure}", [AirportController::class, 'searchFlights']);
+Route::get("/searchFlights/{airport}/{budget}/{depart}/{return}/{exactDates}", [AirportController::class, 'searchFlights']);
 
 
 Route::get('/', function () {

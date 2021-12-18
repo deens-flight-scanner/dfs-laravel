@@ -18,7 +18,11 @@
     <div class="content-div">
         <div class="left-div">
             <form action="">
-                <input class="search-form" type="text" placeholder="Van" id="departure-input">
+                <input class="search-form" type="text" placeholder="From" id="departure-input">
+                <input class="search-form" type="text" placeholder="Price" id="budget-input">
+                <input class="search-form" type="date" placeholder="Departure date" id="departure-date-input">
+                <input class="search-form" type="date" placeholder="Return date" id="return-date-input">
+                <input class="search-form" type="checkbox" id="exact-date-input">
                 <!-- <input class="search-form"  type="text" placeholder="Naar" id="to-input"> -->
                 <button class="search-form"  type="button" id="search-flights-button">Zoek</button>
             </form>
