@@ -7,6 +7,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/home.js"></script>
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 @stop
 
 @section("body-content")

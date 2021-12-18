@@ -57,7 +57,6 @@ $(document).ready(function () {
 
 function showFlightsInTable(data) {
     var origin = data['origin'];
-    // console.log(origin)
     
     var destinations = data['destinations'];
 
@@ -71,7 +70,6 @@ function showFlightsInTable(data) {
 
     var tableHTML = '';
     destinations_sorted.forEach(destination => {
-        // console.log(destination)
         var departd = destination['departd'];
         var departure_date = departd.slice(6, 8) + '-' + departd.slice(4, 6) + '-' + departd.slice(0, 4);
         var returnd = destination['returnd'];
