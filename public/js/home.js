@@ -75,7 +75,7 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
-        tableHTML = tableHTML + '<tr onclick="showDetailsOfFlight(\'' + origin['shortName'] + '\', \'' + destination['airport']['shortName'] + '\')"><td> ' + origin['cityName'] + ' </td><td> ' 
+        tableHTML = tableHTML + '<tr onclick="showDetailsOfFlight(\'' + origin['shortName'] + '\', \'' + destination['airport']['shortName'] + '\', \'' + destination['city']['name'] + '\')"><td> ' + origin['cityName'] + ' </td><td> ' 
         + destination['city']['name'] + ' </td><td> $' + destination['flightInfo']['price'] 
         + ' </td><td> ' + departure_date + ' </td><td> ' + return_date + ' </td></tr>'
     });
@@ -86,8 +86,17 @@ function showFlightsInTable(data) {
     // });
 }
 
-function showDetailsOfFlight(departure, arrival) {
+function showDetailsOfFlight(departure, arrival, arrival_city) {
     fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure + "&arrival=" + arrival)
+        .then(response => {
+            if (response.ok) return response.json();
+            else return Promise.reject(response);
+        })
+        .then(console.log)
+        .catch(err => {
+            alert(err);
+    });
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + arrival_city + "&appid=cf58e60f0dc4f801f6988ec3a38bb8b1")
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject(response);
