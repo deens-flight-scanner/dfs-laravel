@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-image: url("/img/airport-wallpaper.jpg");
+  background-size: cover;
+}
+
+.menu-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #170E08;
+  text-transform: uppercase;
+  color: #FDBB40;
+}
+
+.menu-title p {
+  padding: 0 2rem;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu-browse {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.menu-browse p {
+  padding: 0 2rem;
+  margin: auto;
+}
+
+.menu-browse p a {
+  color: #FDBB40;
+  text-decoration: none;
+}
+/*# sourceMappingURL=master.css.map */

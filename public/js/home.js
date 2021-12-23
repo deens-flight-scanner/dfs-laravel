@@ -87,12 +87,14 @@ function showFlightsInTable(data) {
 }
 
 function showDetailsOfFlight(departure, arrival, arrival_city) {
+    $('#container_right').html('');
+
     fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure + "&arrival=" + arrival)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject(response);
         })
-        .then(console.log)
+        .then(showCO2Emission)
         .catch(err => {
             alert(err);
     });
@@ -101,10 +103,48 @@ function showDetailsOfFlight(departure, arrival, arrival_city) {
             if (response.ok) return response.json();
             else return Promise.reject(response);
         })
-        .then(console.log)
+        .then(showWeather)
         .catch(err => {
             alert(err);
     });
+}
+
+function showWeather(data) {
+    var weather_main = data['main'];
+    var weather_temp = parseInt(weather_main['temp']) - 272;
+    var weather_icon = data['weather']['0']['icon'];
+    var weatherHTML = '<div class="weather-wrapper">' +
+                            '<div class="weather-card">' +
+                                '<img src="http://openweathermap.org/img/wn/' + weather_icon + '@4x.png" class="weather-icon">' +
+                                '<h1>' + weather_temp + 'º</h1>' +
+                                '<p>' + data['name'] + '</p>' +
+                            '</div>' +
+                        '</div>';
+    $('#container_right').append(weatherHTML);
+}
+
+function showCO2Emission(data) {
+    var co2_emission = data['flight']['co2_emission'];
+    var co2_emission_in_tonnes = (parseFloat(co2_emission) * 0.001).toFixed(2);
+    if (0 <= co2_emission_in_tonnes < 0.2) {
+        var co2_img = 'co2-c5.png';
+    } else if (0.2 <= co2_emission_in_tonnes < 0.4) {
+        var co2_img = 'co2-c4.png';
+    } else if (0.4 <= co2_emission_in_tonnes < 0.6) {
+        var co2_img = 'co2-c3.png';
+    } else if (0.6 <= co2_emission_in_tonnes < 0.8) {
+        var co2_img = 'co2-c2.png';
+    } else {
+        var co2_img = 'co2-c1.png';
+    }
+    var weatherHTML = '<div class="weather-wrapper">' +
+                            '<div class="weather-card">' +
+                                '<img src="img/' + co2_img + '" class="weather-icon">' +
+                                '<h1>' + co2_emission_in_tonnes + ' t</h1>' +
+                                '<p>CO<sup>2</sup> emission</p>' +
+                            '</div>' +
+                        '</div>';
+    $('#container_right').append(weatherHTML);
 }
 
 function searchDepartureAirports(name) {
@@ -126,6 +166,7 @@ function searchDepartureAirports(name) {
 function showDepartureAirports(airports) {
     if (airports.length === 0) {
         document.getElementById('departure-suggestions').innerHTML = '';
+        document.getElementById("departure-suggestions").style.display = "none";
     } else {
         let innerHTML = '<table>';
         airports.forEach((airport) => {
@@ -134,10 +175,12 @@ function showDepartureAirports(airports) {
         innerHTML = innerHTML + '<table>';
 
         document.getElementById('departure-suggestions').innerHTML = innerHTML;
+        document.getElementById("departure-suggestions").style.display = "block";
     }
 }
 
 function setDepartureAirport(airport) {
     document.getElementById('departure-suggestions').innerHTML = '';
+    document.getElementById("departure-suggestions").style.display = "none";
     document.getElementById('departure-input').value = airport;
 }
