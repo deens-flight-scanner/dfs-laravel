@@ -41,14 +41,6 @@
                 </div>
                 <button class="form-button" type="button" id="search-flights-button">Search</button>
             </form>
-            <!-- <form action="">
-                <input class="search-form" type="text" placeholder="From" id="departure-input">
-                <input class="search-form" type="text" placeholder="Price" id="budget-input">
-                <input class="search-form" type="date" placeholder="Departure date" id="departure-date-input">
-                <input class="search-form" type="date" placeholder="Return date" id="return-date-input">
-                <input class="search-form" type="checkbox" id="exact-date-input">
-                <button class="search-form"  type="button" id="search-flights-button">Zoek</button>
-            </form> -->
 
             <table class="tbl" cellpadding="0" cellspacing="0" border="0">
                 <thead class="tbl-header">
@@ -61,22 +53,75 @@
                     </tr>
                 </thead>
                 <tbody class="tbl-body" id="table_flights_body">
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
-                    <tr><td>Brussels</td><td>New York</td><td>$555</td><td>10/12/2021</td><td>20/12/2021</td></tr>
                 </tbody>
             </table>
         </div>
 
         <div class="container-right" id="container_right">
-
+            <div class="wrapper-top">
+                <div class="wrapper-top-left">
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <h1 id="wrapper_weather_temp"></h1>
+                            <p id="wrapper_weather_city"></p>
+                        </div>
+                        <div class="card-icon">
+                            <img id="wrapper_weather_icon" src="/">
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-top-right">
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <p>Airline</p>
+                            <h1 id="wrapper_airline_name" style="font-size: 18px;"></h1>
+                        </div>
+                        <div class="card-icon">
+                            <img id="wrapper_airline_icon" src="/">
+                        </div>
+                    </div>
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <p>CO2 emission</p>
+                            <h1 id="wrapper_co2_amount"></h1>
+                        </div>
+                        <div class="card-icon">
+                            <img id="wrapper_co2_icon" src="/">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-middle">
+                <div class="card-wrapper">
+                    <div class="card-text">
+                        <h1>5º</h1>
+                        <p>Bergamo</p>
+                    </div>
+                    <div class="card-icon">
+                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-bottom">
+                <div class="card-wrapper">
+                    <div class="card-text">
+                        <h1>5º</h1>
+                        <p>Bergamo</p>
+                    </div>
+                    <div class="card-icon">
+                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
+                    </div>
+                </div>
+                <div class="card-wrapper">
+                    <div class="card-text">
+                        <h1>5º</h1>
+                        <p>Bergamo</p>
+                    </div>
+                    <div class="card-icon">
+                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

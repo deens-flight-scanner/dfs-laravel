@@ -75,20 +75,15 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
-        tableHTML = tableHTML + '<tr onclick="showDetailsOfFlight(\'' + origin['shortName'] + '\', \'' + destination['airport']['shortName'] + '\', \'' + destination['city']['name'] + '\')"><td> ' + origin['cityName'] + ' </td><td> ' 
+        tableHTML = tableHTML + '<tr onclick="showDetailsOfFlight(\'' + origin['shortName'] + '\', \'' + destination['airport']['shortName'] + '\', \'' + destination['city']['name'] + '\', \'' + destination['airline'] + '\', \'' + destination['airlineCode'] + '\')"><td> ' + origin['cityName'] + ' </td><td> ' 
         + destination['city']['name'] + ' </td><td> $' + destination['flightInfo']['price'] 
         + ' </td><td> ' + departure_date + ' </td><td> ' + return_date + ' </td></tr>'
     });
+    $('.tbl').show();
     $('#table_flights_body').html(tableHTML);
-    
-    // destinations.forEach(element => {
-    //     console.log(element['flightInfo']['price'])
-    // });
 }
 
-function showDetailsOfFlight(departure, arrival, arrival_city) {
-    $('#container_right').html('');
-
+function showDetailsOfFlight(departure, arrival, arrival_city, airline, airlineCode) {
     fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure + "&arrival=" + arrival)
         .then(response => {
             if (response.ok) return response.json();
@@ -107,25 +102,25 @@ function showDetailsOfFlight(departure, arrival, arrival_city) {
         .catch(err => {
             alert(err);
     });
+    showAirline(airline, airlineCode);
+    $('#container_right').show();
 }
 
 function showWeather(data) {
     var weather_main = data['main'];
     var weather_temp = parseInt(weather_main['temp']) - 272;
     var weather_icon = data['weather']['0']['icon'];
-    var weatherHTML = '<div class="weather-wrapper">' +
-                            '<div class="weather-card">' +
-                                '<img src="http://openweathermap.org/img/wn/' + weather_icon + '@4x.png" class="weather-icon">' +
-                                '<h1>' + weather_temp + 'º</h1>' +
-                                '<p>' + data['name'] + '</p>' +
-                            '</div>' +
-                        '</div>';
-    $('#container_right').append(weatherHTML);
+
+    $("#wrapper_weather_icon").attr("src","http://openweathermap.org/img/wn/" + weather_icon + "@4x.png");
+    $('#wrapper_weather_temp').html(weather_temp + 'ºC');
+    $('#wrapper_weather_city').html(data['name']);
 }
 
 function showCO2Emission(data) {
     var co2_emission = data['flight']['co2_emission'];
     var co2_emission_in_tonnes = (parseFloat(co2_emission) * 0.001).toFixed(2);
+    $('#wrapper_co2_amount').html(co2_emission_in_tonnes + ' t');
+
     if (0 <= co2_emission_in_tonnes < 0.2) {
         var co2_img = 'co2-c5.png';
     } else if (0.2 <= co2_emission_in_tonnes < 0.4) {
@@ -137,19 +132,18 @@ function showCO2Emission(data) {
     } else {
         var co2_img = 'co2-c1.png';
     }
-    var weatherHTML = '<div class="weather-wrapper">' +
-                            '<div class="weather-card">' +
-                                '<img src="img/' + co2_img + '" class="weather-icon">' +
-                                '<h1>' + co2_emission_in_tonnes + ' t</h1>' +
-                                '<p>CO<sup>2</sup> emission</p>' +
-                            '</div>' +
-                        '</div>';
-    $('#container_right').append(weatherHTML);
+    $("#wrapper_co2_icon").attr("src","img/" + co2_img);
+}
+
+function showAirline(airline, airlineCode) {
+    $('#wrapper_airline_name').html(airline);
+    $("#wrapper_airline_icon").attr("src","https://content.r9cdn.net/rimg/provider-logos/airlines/v/" + airlineCode + ".png?crop=false&width=50&height=50&fallback=default3.png&_v=be703666bbd51cff10e0564857e14808");
 }
 
 function searchDepartureAirports(name) {
     if (name === '') {
         document.getElementById('departure-suggestions').innerHTML = '';
+        document.getElementById("departure-suggestions").style.display = "none";
     } else {
         fetch("/api/searchSuggestion/" + name)
             .then(response => {

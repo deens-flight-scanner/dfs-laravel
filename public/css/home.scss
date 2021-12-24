@@ -80,9 +80,11 @@
 }
 
 .form-button {
+    display: flex;
+    flex: 1;
     background-color: rgba(0,0,0,0.3);
     padding: 1rem;
-    margin: 0 0.5rem;
+    margin: 0.5rem 0 0 0.5rem;
     border: 0px;
     border-radius: 0.5rem;
     color: white;
@@ -94,10 +96,12 @@
 
 
 // -------------------- TABLE --------------------
+
 .tbl {
     width: 100%;
     border: 2px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: none;
 }
 
 .tbl-header {
@@ -134,56 +138,75 @@
 
 // -------------------- RIGHT CONTAINER --------------------
 .container-right {
-    background-color: green;
+    // background-color: green;
     height:100px;
     margin: 0 2rem;
 }
 
+#container_right {
+    display: none;
+}
+
 // -------------------- WRAPPER --------------------
-.weather-wrapper {
-    margin-top: 20px;
+.wrapper-top {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.weather-card {
-    margin:  20px 5px;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-    width: 270px;
-    height: 270px;
-    background-color: lightgray;
-    box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.23);
-    
-    h1 {
-        position: absolute;
-        font-family: 'Lato', sans-serif;
-        font-weight:300;
-        font-size:80px;
-        color: #48484A;
-        bottom: 0;
-        left: 35px;
+.wrapper-top-left {
+    flex: 1;
+}
+
+.wrapper-top-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-content: space-between;
+    .card-wrapper {
+        justify-content: space-between;
     }
-    
-    p {
-        position: absolute;
-        font-family: 'Lato', sans-serif;
-        font-weight:300;
-        font-size:28px;
-        color: #48484A;
-        bottom: 0;
-        left: 35px;
+    .card-text {
+        padding-left: 2rem;
+        color: white;
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    .card-icon {
+        padding: 1rem 2rem;
+
+        img {
+            height: 50px;
+            width: 50px;
+        }
     }
 }
 
-.weather-icon {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    top: 0;
-    float: right;
-    // margin: 40px 40px 0 0;
+.wrapper-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-wrapper {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    flex: 1;
+
+    margin: 0.5rem;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+.card-text {
+    padding-left: 2rem;
+    color: white;
 }
