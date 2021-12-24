@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="wrapper-top-right">
-                    <div class="card-wrapper">
+                    <div class="card-wrapper top-left">
                         <div class="card-text">
                             <p>Airline</p>
                             <h1 id="wrapper_airline_name" style="font-size: 18px;"></h1>
@@ -80,7 +80,7 @@
                             <img id="wrapper_airline_icon" src="/">
                         </div>
                     </div>
-                    <div class="card-wrapper">
+                    <div class="card-wrapper top-left">
                         <div class="card-text">
                             <p>CO2 emission</p>
                             <h1 id="wrapper_co2_amount"></h1>

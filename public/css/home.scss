@@ -164,6 +164,7 @@
     align-content: space-between;
     .card-wrapper {
         justify-content: space-between;
+        flex: 1;
     }
     .card-text {
         padding-left: 2rem;
@@ -197,7 +198,7 @@
   display: flex;
   // justify-content: space-between;
   align-items: center;
-  flex: 1;
+//   flex: 1;
 
   margin: 0.5rem;
 
@@ -244,6 +245,5 @@
 }
 
 .card-flight-price {
-    flex: 0;
     padding: 0 2rem;
 }
