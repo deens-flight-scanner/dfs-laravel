@@ -144,7 +144,7 @@
 }
 
 #container_right {
-    display: none;
+    // display: none;
 }
 
 // -------------------- WRAPPER --------------------
@@ -194,19 +194,56 @@
 }
 
 .card-wrapper {
-    display: flex;
-    // justify-content: space-between;
-    align-items: center;
-    flex: 1;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
+  flex: 1;
 
-    margin: 0.5rem;
+  margin: 0.5rem;
 
-    background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
 }
 
 .card-text {
-    padding-left: 2rem;
+  padding-left: 2rem;
+  color: white;
+}
+
+.wrapper-bottom-left {
+  display: flex;
+  flex: 2;
+  align-content: space-between;
+
+
+  .card-text {
     color: white;
+    padding: 2rem;
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    h1 {
+      padding: 0;
+      margin: 0;
+      font-size: 18px;
+    }
+    
+    .card-text-times {
+      div {
+        padding-right: 2rem;
+      }
+    }
+  }
+}
+
+.card-text-times {
+  display: flex;
+}
+
+.card-flight-price {
+    flex: 0;
+    padding: 0 2rem;
 }

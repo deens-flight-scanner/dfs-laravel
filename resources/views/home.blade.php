@@ -103,22 +103,34 @@
                 </div>
             </div>
             <div class="wrapper-bottom">
-                <div class="card-wrapper">
+                <div class="card-wrapper wrapper-bottom-left">
                     <div class="card-text">
-                        <h1>5º</h1>
-                        <p>Bergamo</p>
+                        <p>Departure</p>
+                        <h1 id="wrapper_date_departure">10/10/2021</h1>
+                        <p>Return</p>
+                        <h1 id="wrapper_date_return">12/10/2021</h1>
                     </div>
-                    <div class="card-icon">
-                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
+                    <div class="card-text">
+                        <div class="card-text-time-difference">
+                            <p>Time difference</p>
+                            <h1 id="wrapper_time_difference">3:30</h1>
+                        </div>
+                        <div class="card-text-times">
+                            <div>          
+                                <p id="wrapper_airport_departure">Brussels</p>
+                                <h1 id="wrapper_time_home">12:00</h1>
+                            </div>
+                            <div>
+                                <p id="wrapper_airport_arrival">New Delhi</p>
+                                <h1 id="wrapper_time_away">15:40</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-wrapper">
-                    <div class="card-text">
-                        <h1>5º</h1>
-                        <p>Bergamo</p>
-                    </div>
-                    <div class="card-icon">
-                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
+                    <div class="card-text card-flight-price">
+                        <p>Price</p>
+                        <h1 id="wrapper_flight_price">$$$</h1>
                     </div>
                 </div>
             </div>

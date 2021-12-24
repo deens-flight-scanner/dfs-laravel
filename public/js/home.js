@@ -16,25 +16,13 @@ $(document).ready(function () {
         if (departure_date === '') {
             departure_date = 'none';
         } else {
-            var date = new Date(departure_date);
-            var dd = date.getDate();
-            dd = dd.toString().length == 1 ? '0' + dd : dd;
-            var mm = date.getMonth() + 1;
-            mm = mm.toString().length == 1 ? '0' + mm : mm;
-            var yy = date.getFullYear();
-            departure_date = yy + '' + mm + '' + dd;
+            departure_date = dateTransform(departure_date);
         }
 
         if (return_date === '') {
             return_date = 'none';
         } else {
-            var date = new Date(return_date);
-            var dd = date.getDate();
-            dd = dd.toString().length == 1 ? '0' + dd : dd;
-            var mm = date.getMonth() + 1;
-            mm = mm.toString().length == 1 ? '0' + mm : mm;
-            var yy = date.getFullYear();
-            return_date = yy + '' + mm + '' + dd;
+            return_date = dateTransform(return_date);
         }
 
         console.log(departure_airport, budget, departure_date, return_date, exact_date);
@@ -54,6 +42,17 @@ $(document).ready(function () {
         }
     };
 });
+
+function dateTransform(date_object) {
+    var date = new Date(date_object);
+    var dd = date.getDate();
+    dd = dd.toString().length == 1 ? '0' + dd : dd;
+    var mm = date.getMonth() + 1;
+    mm = mm.toString().length == 1 ? '0' + mm : mm;
+    var yy = date.getFullYear();
+
+    return yy + '' + mm + '' + dd;
+}
 
 function showFlightsInTable(data) {
     var origin = data['origin'];
@@ -75,16 +74,18 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
-        tableHTML = tableHTML + '<tr onclick="showDetailsOfFlight(\'' + origin['shortName'] + '\', \'' + destination['airport']['shortName'] + '\', \'' + destination['city']['name'] + '\', \'' + destination['airline'] + '\', \'' + destination['airlineCode'] + '\')"><td> ' + origin['cityName'] + ' </td><td> ' 
-        + destination['city']['name'] + ' </td><td> $' + destination['flightInfo']['price'] 
-        + ' </td><td> ' + departure_date + ' </td><td> ' + return_date + ' </td></tr>'
+        tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(" + JSON.stringify(destination) + ", " + JSON.stringify(origin) + ")'><td> " + origin['cityName'] + " </td><td> " 
+        + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] 
+        + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>"
     });
     $('.tbl').show();
     $('#table_flights_body').html(tableHTML);
 }
 
-function showDetailsOfFlight(departure, arrival, arrival_city, airline, airlineCode) {
-    fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure + "&arrival=" + arrival)
+function showDetailsOfFlight(flight, origin) {
+    var departure_code = flight['originAirportShortName'];
+    var arrival_code = flight['airport']['shortName'];
+    fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure_code + "&arrival=" + arrival_code)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject(response);
@@ -93,6 +94,9 @@ function showDetailsOfFlight(departure, arrival, arrival_city, airline, airlineC
         .catch(err => {
             alert(err);
     });
+
+
+    var arrival_city = flight['city']['name'];
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + arrival_city + "&appid=cf58e60f0dc4f801f6988ec3a38bb8b1")
         .then(response => {
             if (response.ok) return response.json();
@@ -102,7 +106,23 @@ function showDetailsOfFlight(departure, arrival, arrival_city, airline, airlineC
         .catch(err => {
             alert(err);
     });
-    showAirline(airline, airlineCode);
+
+    
+    var airline = flight['airline'];
+    var airline_code = flight['airlineCode'];
+    showAirline(airline, airline_code);
+
+    var departd = flight['departd'];
+    var departure_date = departd.slice(6, 8) + '-' + departd.slice(4, 6) + '-' + departd.slice(0, 4);
+    var returnd = flight['returnd'];
+    var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
+    var departure_airport = origin['cityName'];
+    var arrival_airport = flight['city']['name'];
+    showTimeAndDate(departure_date, return_date, departure_airport, arrival_airport);
+
+
+    $('#wrapper_flight_price').html('$' + flight['flightInfo']['price']);
+
     $('#container_right').show();
 }
 
@@ -122,22 +142,30 @@ function showCO2Emission(data) {
     $('#wrapper_co2_amount').html(co2_emission_in_tonnes + ' t');
 
     if (0 <= co2_emission_in_tonnes < 0.2) {
-        var co2_img = 'co2-c5.png';
+        var co2_img = 'https://i.ibb.co/d20LjPC/co2-c5.png';
     } else if (0.2 <= co2_emission_in_tonnes < 0.4) {
-        var co2_img = 'co2-c4.png';
+        var co2_img = 'https://i.ibb.co/3m6XJMy/co2-c4.png';
     } else if (0.4 <= co2_emission_in_tonnes < 0.6) {
-        var co2_img = 'co2-c3.png';
+        var co2_img = 'https://i.ibb.co/1T34kWp/co2-c3.png';
     } else if (0.6 <= co2_emission_in_tonnes < 0.8) {
-        var co2_img = 'co2-c2.png';
+        var co2_img = 'https://i.ibb.co/vP9wwDx/co2-c2.png';
     } else {
-        var co2_img = 'co2-c1.png';
+        var co2_img = 'https://i.ibb.co/MkYPBks/co2-c1.png';
     }
-    $("#wrapper_co2_icon").attr("src","img/" + co2_img);
+    $("#wrapper_co2_icon").attr("src", co2_img);
 }
 
 function showAirline(airline, airlineCode) {
     $('#wrapper_airline_name').html(airline);
     $("#wrapper_airline_icon").attr("src","https://content.r9cdn.net/rimg/provider-logos/airlines/v/" + airlineCode + ".png?crop=false&width=50&height=50&fallback=default3.png&_v=be703666bbd51cff10e0564857e14808");
+}
+
+function showTimeAndDate(departure_date, return_date, departure_airport, arrival_airport) {
+    $('#wrapper_date_departure').html(departure_date);
+    $('#wrapper_date_return').html(return_date);
+
+    $('#wrapper_airport_departure').html(departure_airport);
+    $('#wrapper_airport_arrival').html(arrival_airport);
 }
 
 function searchDepartureAirports(name) {
