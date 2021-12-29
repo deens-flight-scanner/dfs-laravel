@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AirportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +13,20 @@ use App\Http\Controllers\AirportController;
 |
 */
 
-Route::get("/home", [AirportController::class, 'home']);
+// Google login
+Route::get('auth/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
 
-Route::get("/searchFlights/{airport}/{budget}/{depart}/{return}/{exactDates}", [AirportController::class, 'searchFlights']);
+// GitHub login
+Route::get('auth/github', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGitHub'])->name('auth.github');
+Route::get('auth/github/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGitHubCallback']);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
