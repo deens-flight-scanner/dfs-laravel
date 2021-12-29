@@ -17,8 +17,8 @@ and open the template in the editor.
                 <p>Deans Flight Scanner</p>
             </div>
             <div class="menu-browse">
-                <p><a href="/">Home</a></p>
-                <p><a href="/">Favorites</a></p>
+                <p><a href="/home">Home</a></p>
+                <p><a href="/favorite">Favorites</a></p>
                 <p><a href="/">Airports</a></p>
                 <p><a href="/">Logout</a></p>
             </div>

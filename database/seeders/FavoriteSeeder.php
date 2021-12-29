@@ -29,6 +29,7 @@ class FavoriteSeeder extends Seeder
                 'arrival_date' => $faker->date,
                 'price' => rand(0,1000),
                 'airline' => '',
+                'airline_code' => '',
             ]);
         }
     }

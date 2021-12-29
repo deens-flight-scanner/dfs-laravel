@@ -74,7 +74,7 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
-        tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(" + JSON.stringify(destination) + ", " + JSON.stringify(origin) + ")'><td> " + origin['cityName'] + " </td><td> " 
+        tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\")'><td> " + origin['cityName'] + " </td><td> " 
         + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] 
         + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>"
     });
@@ -82,10 +82,8 @@ function showFlightsInTable(data) {
     $('#table_flights_body').html(tableHTML);
 }
 
-function showDetailsOfFlight(flight, origin) {
-    var departure_code = flight['originAirportShortName'];
-    var arrival_code = flight['airport']['shortName'];
-    fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure_code + "&arrival=" + arrival_code)
+function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price) {
+    fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure_airport + "&arrival=" + arrival_airport)
         .then(response => {
             if (response.ok) return response.json();
             else return Promise.reject(response);
@@ -96,7 +94,6 @@ function showDetailsOfFlight(flight, origin) {
     });
 
 
-    var arrival_city = flight['city']['name'];
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + arrival_city + "&appid=cf58e60f0dc4f801f6988ec3a38bb8b1")
         .then(response => {
             if (response.ok) return response.json();
@@ -108,20 +105,12 @@ function showDetailsOfFlight(flight, origin) {
     });
 
     
-    var airline = flight['airline'];
-    var airline_code = flight['airlineCode'];
     showAirline(airline, airline_code);
 
-    var departd = flight['departd'];
-    var departure_date = departd.slice(6, 8) + '-' + departd.slice(4, 6) + '-' + departd.slice(0, 4);
-    var returnd = flight['returnd'];
-    var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
-    var departure_airport = origin['cityName'];
-    var arrival_airport = flight['city']['name'];
-    showTimeAndDate(departure_date, return_date, departure_airport, arrival_airport);
+    showTimeAndDate(departure_date, return_date, departure_city, arrival_city);
 
 
-    $('#wrapper_flight_price').html('$' + flight['flightInfo']['price']);
+    $('#wrapper_flight_price').html('$' + price);
 
     $('#container_right').show();
 }

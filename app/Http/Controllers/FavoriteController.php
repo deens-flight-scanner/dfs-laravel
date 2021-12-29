@@ -6,9 +6,25 @@ use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Resources\FavoriteResource;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+        //
+        $user_id = Auth::guard('web')->user()->id;
+        $favorites = Favorite::where('user_id', '=', $user_id)->get();
+
+        // $favorites = Favorite::all();
+        return view("favorite")->with('favorites', $favorites);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -104,14 +120,13 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Favorite  $favorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Favorite $favorite)
+    public function destroy($id)
     {
-        //
-        $favorite->delete();
-
+        Favorite::destroy($id);
+        
         return response(['message' => 'Favorite deleted']);
     }
 }

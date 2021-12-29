@@ -24,5 +24,6 @@ class Favorite extends Model
         'arrival_date',
         'price',
         'airline',
+        'airline_code',
     ];
 }

@@ -11,116 +11,30 @@
     margin: 0 2rem;
 }
 
-// -------------------- FORM --------------------
-.container-form {
-    margin-bottom: 2rem;
-}
-.form-row-one {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-row-two {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-group {
-    flex: 1;
-    align-items: baseline;
-    display: flex;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: rgba(0,0,0,0.3);
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    font-size: 13px;
-    height: 2rem;
-}
-
-.form-group-from {
-    flex-grow: 2; 
-}
-
-.form-label {
-    padding: 0.5rem;
-    color: white;
-}
-
-::placeholder {
-    color: rgba(256,256,256,0.5);
-}
-::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-}
-.form-input {
-    flex: 1;
-    height: 1rem;
-    background-color: rgba(0,0,0,0.2);
-    padding: 0.5rem;
-    color: white;
-    border: 0px;
-    border-radius: 0.5rem;
-}
-
-.form-input-suggestion {
-    width: fit-content;
-    margin-top: -0.5rem;
-    margin-left: 3rem;
-    margin-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 2rem;
-    padding-bottom: 0.5rem;
-    background-color: rgba(0,0,0,0.3);
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    border-radius: 0 0 0.5rem 0.5rem;
-    font-size: 13px;
-    color: white;
-    display: none;
-}
-
-.form-button {
-    display: flex;
-    flex: 1;
-    background-color: rgba(0,0,0,0.3);
-    padding: 1rem;
-    margin: 0.5rem 0 0 0.5rem;
-    border: 0px;
-    border-radius: 0.5rem;
-    color: white;
-    &:hover {
-        background-color: rgba(0,0,0,0.4);
-        cursor: pointer;
-    }
-}
-
 
 // -------------------- TABLE --------------------
-.container-tbl {
-    thead {
-        display: block;
-    }
-    tbody {
-        display: block;
-        overflow-y: scroll;
-        max-height: 35rem;
-    }
-    thead th, tbody td {
-        width: 90px;
-    }
+thead {
+    display: block;
+}
+tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 35rem;
+}
+thead th, tbody td {
+    width: 90px;
 }
 
 .tbl {
     width: 100%;
     border: 2px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    display: none;
 }
 
 .tbl-header {
     background-color: rgba(0,0,0,0.5);
     th {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0rem 0.5rem 1rem;
         text-align: left;
         font-weight: bold;
         font-size: 15px;
@@ -133,7 +47,7 @@
     background-color: rgba(0,0,0,0.3);
 
     td {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0rem 0.5rem 1rem;
         text-align: left;
         vertical-align:middle;
         font-weight: 300;
@@ -149,10 +63,24 @@
     }
 }
 
+.tbl-button {
+    display: flex;
+    flex: 1;
+    background-color: rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    border: 0px;
+    border-radius: 0.5rem;
+    color: white;
+    &:hover {
+        background-color: rgba(0,0,0,0.4);
+        cursor: pointer;
+    }
+}
+
 // -------------------- RIGHT CONTAINER --------------------
 .container-right {
     // background-color: green;
-    height:100px;
+    height: fit-content;
     margin: 0 2rem;
 }
 
