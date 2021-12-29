@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Favorite;
 
 class FavoriteController extends Controller
 {
@@ -14,6 +15,7 @@ class FavoriteController extends Controller
     public function index()
     {
         //
+        return Favorite::all();
     }
 
     /**
@@ -25,6 +27,18 @@ class FavoriteController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'user_id' => 'required',
+            'departure_airport' => 'required',
+            'departure_city' => 'required',
+            'departure_date' => 'required',
+            'arrival_airport' => 'required',
+            'arrival_city' => 'required',
+            'arrival_date' => 'required',
+            'price' => 'required',
+        ]);
+
+        return Favorite::create($request->all());
     }
 
     /**
@@ -36,6 +50,19 @@ class FavoriteController extends Controller
     public function show($id)
     {
         //
+        return Favorite::find($id);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $user_id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUserID($user_id)
+    {
+        
+        return Favorite::where('user_id', '=', user_id)->get();
     }
 
     /**
@@ -48,6 +75,10 @@ class FavoriteController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $favorite = Favorite::find($id);
+        $favorite->update($request->all());
+
+        return $favorite;
     }
 
     /**
@@ -59,5 +90,6 @@ class FavoriteController extends Controller
     public function destroy($id)
     {
         //
+        return Favorite::destroy($id);
     }
 }

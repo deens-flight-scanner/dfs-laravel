@@ -28,7 +28,7 @@ $(document).ready(function () {
         console.log(departure_airport, budget, departure_date, return_date, exact_date);
 
         if (departure_airport.charAt(3) === ':') {
-            fetch("/searchFlights/" + departure_airport.substring(0, 3) + "/" + budget + "/" + departure_date + "/" + return_date + "/" + exact_date)
+            fetch("/api/flights/search/" + departure_airport.substring(0, 3) + "/" + budget + "/" + departure_date + "/" + return_date + "/" + exact_date)
             .then(response => {
                 if (response.ok) return response.json();
                 else return Promise.reject(response);
@@ -173,7 +173,7 @@ function searchDepartureAirports(name) {
         document.getElementById('departure-suggestions').innerHTML = '';
         document.getElementById("departure-suggestions").style.display = "none";
     } else {
-        fetch("/api/searchSuggestion/" + name)
+        fetch("/api/airports/search/" + name)
             .then(response => {
                 if (response.ok) return response.json();
                 else return Promise.reject(response);

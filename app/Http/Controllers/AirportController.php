@@ -32,7 +32,7 @@ class AirportController extends Controller
     /**
      * Search for airports that match the input
      */
-    public function searchSuggestion($name)
+    public function searchAirports($name)
     {
         $airports = Airport::where('code', 'LIKE', '%'.$name.'%')
             ->orWhere('name', 'LIKE', '%'.$name.'%')
@@ -43,7 +43,7 @@ class AirportController extends Controller
     }
 
     /**
-     * Geef laptops in de price-range
+     * Search flights 
      */
     public function searchFlights($airport, $budget, $depart, $return, $exactDates)
     {
