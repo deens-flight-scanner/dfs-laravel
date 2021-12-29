@@ -36,7 +36,7 @@ class LoginController extends Controller
             return Redirect::to('auth/github');
         }
 
-        $authUser = $this->findOrCreateGitHubUser($user, "github");
+        $authUser = $this->findOrCreateGitHubUser($user);
 
         Auth::login($authUser, true);
 
@@ -79,7 +79,7 @@ class LoginController extends Controller
             return Redirect::to('auth/google');
         }
 
-        $authUser = $this->findOrCreateGoogleUser($user, "google");
+        $authUser = $this->findOrCreateGoogleUser($user);
 
         Auth::login($authUser, true);
 
