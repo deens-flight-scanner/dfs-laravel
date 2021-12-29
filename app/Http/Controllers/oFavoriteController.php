@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favorite;
 use Illuminate\Http\Request;
-use App\Http\Resources\FavoriteResource;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Favorite;
 
 class FavoriteController extends Controller
 {
@@ -17,10 +15,7 @@ class FavoriteController extends Controller
     public function index()
     {
         //
-        $favorites = Favorite::all();
-        return response([ 'favorites' => 
-            FavoriteResource::collection($favorites), 
-            'message' => 'Successful'], 200);
+        return Favorite::all();
     }
 
     /**
@@ -32,9 +27,7 @@ class FavoriteController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $request->all();
-
-        $validator = Validator::make($data, [
+        $request->validate([
             'user_id' => 'required',
             'departure_airport' => 'required',
             'departure_city' => 'required',
@@ -45,28 +38,19 @@ class FavoriteController extends Controller
             'price' => 'required',
         ]);
 
-        if($validator->fails()){
-            return response(['error' => $validator->errors(), 
-            'Validation Error']);
-        }
-
-        $favorite = Favorite::create($data);
-
-        return response([ 'favorite' => new 
-            FavoriteResource($favorite), 
-            'message' => 'Success'], 200);
+        return Favorite::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Favorite  $favorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Favorite $favorite)
+    public function show($id)
     {
-        return response([ 'favorite' => new 
-            FavoriteResource($favorite), 'message' => 'Success'], 200);
+        //
+        return Favorite::find($id);
     }
 
     /**
@@ -77,41 +61,35 @@ class FavoriteController extends Controller
      */
     public function showByUserID($user_id)
     {
-        $favorites = Favorite::where('user_id', '=', $user_id)->get();
-
-        return response([ 'favorites' => 
-            FavoriteResource::collection($favorites), 
-            'message' => 'Successful'], 200);
+        
+        return Favorite::where('user_id', '=', $user_id)->get();
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Favorite  $favorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Favorite $favorite)
+    public function update(Request $request, $id)
     {
         //
-
+        $favorite = Favorite::find($id);
         $favorite->update($request->all());
 
-        return response([ 'favorite' => new 
-            FavoriteResource($favorite), 'message' => 'Success'], 200);
+        return $favorite;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Favorite  $favorite
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Favorite $favorite)
+    public function destroy($id)
     {
         //
-        $favorite->delete();
-
-        return response(['message' => 'Favorite deleted']);
+        return Favorite::destroy($id);
     }
 }

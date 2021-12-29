@@ -39,6 +39,8 @@ class LoginController extends Controller
         $authUser = $this->findOrCreateGitHubUser($user);
 
         Auth::login($authUser, true);
+        
+        auth()->user()->createToken('api-token');
 
         return Redirect::to('dashboard');
     }
@@ -82,6 +84,8 @@ class LoginController extends Controller
         $authUser = $this->findOrCreateGoogleUser($user);
 
         Auth::login($authUser, true);
+        
+        auth()->user()->createToken('api-token');
 
         return Redirect::to('dashboard');
     }

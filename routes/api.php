@@ -17,14 +17,16 @@ use App\Http\Controllers\FavoriteController;
 */
 
 // // Protected routes
-// Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:api']], function() {
 
-// });
+    Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID']);
+});
 
 // routes
-Route::post('/favorites', [FavoriteController::class, 'store']);
-Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID']);
-Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+// Route::post('/favorites', [FavoriteController::class, 'store']);
+// Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+// Route::apiResource('/favorites', 'FavoriteController')->middleware('auth:api');
+
 
 Route::get('/airports/search/{name}', [AirportController::class, 'searchAirports']);
 
