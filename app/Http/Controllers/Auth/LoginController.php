@@ -42,7 +42,7 @@ class LoginController extends Controller
         
         auth()->user()->createToken('api-token');
 
-        return Redirect::to('dashboard');
+        return Redirect::to('home');
     }
 
     /**
@@ -87,7 +87,7 @@ class LoginController extends Controller
         
         auth()->user()->createToken('api-token');
 
-        return Redirect::to('dashboard');
+        return Redirect::to('home');
     }
 
     /**
