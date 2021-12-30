@@ -24,8 +24,9 @@ Route::group(['middleware' => ['auth:api']], function() {
 
 Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID']);
 
-Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 Route::post('/favorites/', [FavoriteController::class, 'store']);
+
+Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 
 // routes
 // Route::post('/favorites', [FavoriteController::class, 'store']);

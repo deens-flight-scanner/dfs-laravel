@@ -138,6 +138,7 @@
                         </div>
                     </div>
                     <form id="form_add_favorite" method="POST" action="api/favorites/">
+                        @csrf  
 
                         <div class="card-wrapper">
                             <input type="number" style="display: none" name="user_id" id="favorite_user_id" value={{ Auth::user()->id }}>
