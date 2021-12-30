@@ -32,6 +32,12 @@ body {
           justify-content: space-between;
 }
 
+.menu-browse form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .menu-browse p {
   padding: 0 2rem;
   margin: auto;

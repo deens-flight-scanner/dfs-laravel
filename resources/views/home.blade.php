@@ -60,6 +60,7 @@
             
         </div>
 
+        @auth
         <div class="container-right" id="container_right">
             <div class="wrapper-top">
                 <div class="wrapper-top-left">
@@ -156,21 +157,9 @@
                         </div>
                     </form>
                 </div>
-                {{-- <div>
-                    <div class="card-wrapper">
-                        <div class="card-text card-flight-price">
-                            <p>Price</p>
-                            <h1 id="wrapper_flight_price">$$$</h1>
-                        </div>
-                    </div>
-                    <div class="card-wrapper">
-                        <div class="card-text">
-                            <p>Favorite</p>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
+        @endauth
     </div>
 @stop
 

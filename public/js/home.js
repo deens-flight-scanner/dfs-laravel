@@ -25,8 +25,6 @@ $(document).ready(function () {
             return_date = dateTransform(return_date);
         }
 
-        console.log(departure_airport, budget, departure_date, return_date, exact_date);
-
         if (departure_airport.charAt(3) === ':') {
             fetch("/api/flights/search/" + departure_airport.substring(0, 3) + "/" + budget + "/" + departure_date + "/" + return_date + "/" + exact_date)
             .then(response => {
@@ -94,9 +92,12 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
-        tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\")'><td> " + origin['cityName'] + " </td><td> " 
-        + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] 
-        + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>"
+        if ($(".container-right")[0]) {
+            tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
+        } else {
+            tableHTML = tableHTML + "<tr><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
+        }
+        
     });
     $('.tbl').show();
     $('#table_flights_body').html(tableHTML);
