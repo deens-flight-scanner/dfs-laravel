@@ -49,6 +49,7 @@ class FavoriteController extends Controller
     {
         //
         $data = $request->all();
+        error_log(json_encode($data));
 
         $validator = Validator::make($data, [
             'user_id' => 'required',
@@ -62,14 +63,30 @@ class FavoriteController extends Controller
         ]);
 
         if($validator->fails()){
-            return response(['error' => $validator->errors(), 
-            'Validation Error']);
+            return response(['message' => 'Validation Error', 
+            'error' => $validator->errors()]);
         }
 
-        $favorite = Favorite::create($data);
+        $favorite = Favorite::where('user_id', '=', $request->user_id)
+                                ->where('departure_airport', '=', $request->departure_airport)
+                                ->where('departure_city', '=', $request->departure_city)
+                                ->where('departure_date', '=', $request->departure_date)
+                                ->where('arrival_airport', '=', $request->arrival_airport)
+                                ->where('arrival_city', '=', $request->arrival_city)
+                                ->where('arrival_date', '=', $request->arrival_date)
+                                ->where('price', '=', $request->price)
+                                ->where('airline', '=', $request->airline)
+                                ->where('airline_code', '=', $request->airline_code)
+                                ->first();
+        if ($favorite !== null) {
+            // 
+            return response(['message' => 'Flight already added as favorite']);
+        }
+
+        $new_favorite = Favorite::create($data);
 
         return response([ 'favorite' => new 
-            FavoriteResource($favorite), 
+            FavoriteResource($new_favorite), 
             'message' => 'Success'], 200);
     }
 
@@ -127,6 +144,6 @@ class FavoriteController extends Controller
     {
         Favorite::destroy($id);
         
-        return response(['message' => 'Favorite deleted']);
+        return response(['message' => 'Favorite deleted'], 200);
     }
 }

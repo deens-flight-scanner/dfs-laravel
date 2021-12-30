@@ -35,6 +35,8 @@ thead th, tbody td {
 }
 
 .tbl-header {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -48,6 +50,8 @@ thead th, tbody td {
 }
 
 .tbl-body {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -213,8 +217,51 @@ thead th, tbody td {
   font-size: 18px;
 }
 
+.wrapper-bottom-left .card-text .h1-date {
+  width: 100px;
+}
+
 .wrapper-bottom-left .card-text .card-text-times div {
   padding-right: 2rem;
+}
+
+.wrapper-bottom-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+
+.wrapper-bottom-right .card-wrapper {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.wrapper-bottom-right .card-text {
+  padding: 1rem 2rem;
+  color: white;
+}
+
+.wrapper-bottom-right .card-text p {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper-bottom-right .card-text h1 {
+  padding: 0;
+  margin: 0;
 }
 
 .card-text-times {
@@ -224,6 +271,37 @@ thead th, tbody td {
 }
 
 .card-flight-price {
-  padding: 0 2rem;
+  padding: 1rem 2rem;
+}
+
+.card-flight-price h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.card-flight-price p {
+  padding: 0;
+  margin: 0;
+}
+
+.fav-button {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1rem 2rem;
+  border: 0px;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.fav-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 /*# sourceMappingURL=favorite.css.map */

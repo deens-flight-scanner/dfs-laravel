@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <div class="wrapper-top-right">
-                    <div class="card-wrapper top-left">
+                    <div class="card-wrapper">
                         <div class="card-text">
                             <p>Airline</p>
                             <h1 id="wrapper_airline_name" style="font-size: 18px;"></h1>
@@ -83,7 +83,7 @@
                             <img id="wrapper_airline_icon" src="/">
                         </div>
                     </div>
-                    <div class="card-wrapper top-left">
+                    <div class="card-wrapper">
                         <div class="card-text">
                             <p>CO2 emission</p>
                             <h1 id="wrapper_co2_amount"></h1>
@@ -109,9 +109,9 @@
                 <div class="card-wrapper wrapper-bottom-left">
                     <div class="card-text">
                         <p>Departure</p>
-                        <h1 id="wrapper_date_departure">10/10/2021</h1>
+                        <h1 class="h1-date" id="wrapper_date_departure">10/10/2021</h1>
                         <p>Return</p>
-                        <h1 id="wrapper_date_return">12/10/2021</h1>
+                        <h1 class="h1-date" id="wrapper_date_return">12/10/2021</h1>
                     </div>
                     <div class="card-text">
                         <div class="card-text-time-difference">
@@ -130,12 +130,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-wrapper">
-                    <div class="card-text card-flight-price">
-                        <p>Price</p>
-                        <h1 id="wrapper_flight_price">$$$</h1>
+                <div class="wrapper-bottom-right">
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <p>Airline</p>
+                            <h1 id="wrapper_flight_price">$$$</h1>
+                        </div>
                     </div>
+                    <form id="form_add_favorite" method="POST" action="api/favorites/">
+
+                        <div class="card-wrapper">
+                            <input type="number" style="display: none" name="user_id" id="favorite_user_id" value={{ Auth::user()->id }}>
+                            <input type="text" style="display: none" name="departure_airport" id="favorite_departure_airport">
+                            <input type="text" style="display: none" name="departure_city" id="favorite_departure_city">
+                            <input type="text" style="display: none" name="departure_date" id="favorite_departure_date">
+                            <input type="text" style="display: none" name="arrival_airport" id="favorite_arrival_airport">
+                            <input type="text" style="display: none" name="arrival_city" id="favorite_arrival_city">
+                            <input type="text" style="display: none" name="arrival_date" id="favorite_arrival_date">
+                            <input type="number" style="display: none" name="price" id="favorite_price">
+                            <input type="text" style="display: none" name="airline" id="favorite_airline">
+                            <input type="text" style="display: none" name="airline_code" id="favorite_airline_code">
+
+                            <input type="submit" class="fav-button" id="btn_add_favorite" value="Favorite">
+                        </div>
+                    </form>
                 </div>
+                {{-- <div>
+                    <div class="card-wrapper">
+                        <div class="card-text card-flight-price">
+                            <p>Price</p>
+                            <h1 id="wrapper_flight_price">$$$</h1>
+                        </div>
+                    </div>
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <p>Favorite</p>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
     </div>

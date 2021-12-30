@@ -41,6 +41,26 @@ $(document).ready(function () {
             alert('Please select an airport from the suggestions.')
         }
     };
+    
+    $("#form_add_favorite").submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: "POST",
+            url: $(this).attr( 'action' ),
+            data: $(this).serialize(),
+            success: function(data){
+                var message = data['message'];
+                if (message != 'Success') {
+                    alert(message);
+                } else {
+                    alert('Flight added to favorites');
+                }
+            }
+        });
+
+        return false;
+    });
 });
 
 function dateTransform(date_object) {
@@ -83,6 +103,18 @@ function showFlightsInTable(data) {
 }
 
 function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price) {
+    $('#favorite_departure_airport').val(departure_airport);
+    $('#favorite_departure_city').val(departure_city);
+    $('#favorite_departure_date').val(departure_date);
+    $('#favorite_arrival_airport').val(arrival_airport);
+    $('#favorite_arrival_city').val(arrival_city);
+    $('#favorite_arrival_date').val(return_date);
+    $('#favorite_price').val(price);
+    $('#favorite_airline').val(airline);
+    $('#favorite_airline_code').val(airline_code);
+
+    
+    
     fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure_airport + "&arrival=" + arrival_airport)
         .then(response => {
             if (response.ok) return response.json();
@@ -195,3 +227,4 @@ function setDepartureAirport(airport) {
     document.getElementById("departure-suggestions").style.display = "none";
     document.getElementById('departure-input').value = airport;
 }
+

@@ -21,29 +21,18 @@
                         <th>Departure</th>
                         <th>Return</th>
                         <th>Airline</th>
-                        <th></th>
+                        {{-- <th></th> --}}
                     </tr>
                 </thead>
                 <tbody class="tbl-body" id="table_flights_body">
                     @foreach ($favorites as $favorite)
-                        <tr onclick="showDetailsOfFlight('{{ $favorite->departure_airport }}', '{{ $favorite->arrival_airport }}', '{{ $favorite->airline }}', '{{ $favorite->airline_code }}', '{{ $favorite->departure_date }}', '{{ $favorite->arrival_date }}', '{{ $favorite->departure_city }}', '{{ $favorite->arrival_city }}', '{{ $favorite->price}}')">
+                        <tr onclick="showDetailsOfFlight('{{ $favorite->departure_airport }}', '{{ $favorite->arrival_airport }}', '{{ $favorite->airline }}', '{{ $favorite->airline_code }}', '{{ $favorite->departure_date }}', '{{ $favorite->arrival_date }}', '{{ $favorite->departure_city }}', '{{ $favorite->arrival_city }}', '{{ $favorite->price}}', '{{ $favorite->id }}')">
                             <td>{{ $favorite->departure_city }}</td>
                             <td>{{ $favorite->arrival_city }}</td>
                             <td>${{ $favorite->price }}</td>
                             <td>{{ $favorite->departure_date }}</td>
                             <td>{{ $favorite->arrival_date }}</td>
                             <td>{{ $favorite->airline }}</td>
-                            <td>
-                                <form method="POST" action="api/favorites/{{ $favorite->id }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-
-                                    <div class="form-group">
-                                        <input type="submit" class="tbl-button" id="btn_delete_favorite" value="Remove">
-                                    </div>
-                                </form>
-                                {{-- <button class="tbl-button" type="button" onclick="deleteFavorite('{{ $favorite->id }}')">Remove</button> --}}
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -99,9 +88,9 @@
                 <div class="card-wrapper wrapper-bottom-left">
                     <div class="card-text">
                         <p>Departure</p>
-                        <h1 id="wrapper_date_departure">10/10/2021</h1>
+                        <h1 class="h1-date" id="wrapper_date_departure">10/10/2021</h1>
                         <p>Return</p>
-                        <h1 id="wrapper_date_return">12/10/2021</h1>
+                        <h1 class="h1-date" id="wrapper_date_return">12/10/2021</h1>
                     </div>
                     <div class="card-text">
                         <div class="card-text-time-difference">
@@ -120,11 +109,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-wrapper">
-                    <div class="card-text card-flight-price">
-                        <p>Price</p>
-                        <h1 id="wrapper_flight_price">$$$</h1>
+                <div class="wrapper-bottom-right">
+                    <div class="card-wrapper">
+                        <div class="card-text">
+                            <p>Airline</p>
+                            <h1 id="wrapper_flight_price">$$$</h1>
+                        </div>
                     </div>
+                    <form id="form_delete_favorite" method="POST" action="">
+                        @method('DELETE')
+                        @csrf
+
+                        <div class="card-wrapper">
+                            <input type="submit" class="fav-button" id="btn_delete_favorite" value="Unfavorite">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

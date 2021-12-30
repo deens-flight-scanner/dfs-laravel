@@ -1,14 +1,35 @@
 $(document).ready(function () {
-    $('#btn_delete_favorite').click(function(e){
-            e.preventDefault() // Don't post the form, unless confirmed
-            if (confirm('Are you sure?')) {
-                // Post the form
-                $(e.target).closest('form').submit() // Post the surrounding form
+    // $('#btn_delete_favorite').click(function(e) {
+    //     console.log('test');
+    //     e.preventDefault() // Don't post the form, unless confirmed
+    //     if (confirm('Are you sure?')) {
+    //         // Post the form
+            
+    //     }
+    // });
+
+    $("#form_delete_favorite").submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'DELETE',
+            url: $(this).attr( 'action' ),
+            success: function(data){
+                var message = data['message'];
+                if (message != 'Favorite deleted') {
+                    alert(message);
+                } else {
+                    location.reload();
+                    alert('Flight removed from favorites');
+                }
             }
         });
+
+        return false;
+    });
 });
 
-function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price) {
+function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price, favorite_id) {
     fetch("https://dfs-co2.herokuapp.com/calculate-co2?departure=" + departure_airport + "&arrival=" + arrival_airport)
         .then(response => {
             if (response.ok) return response.json();
@@ -37,6 +58,8 @@ function showDetailsOfFlight(departure_airport, arrival_airport, airline, airlin
 
 
     $('#wrapper_flight_price').html('$' + price);
+
+    $("#form_delete_favorite").attr("action", "api/favorites/" + favorite_id);
 
     $('#container_right').show();
 }

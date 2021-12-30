@@ -118,6 +118,9 @@
 }
 
 .tbl-header {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    
     background-color: rgba(0,0,0,0.5);
     th {
         padding: 0.5rem 1rem;
@@ -130,6 +133,9 @@
 }
 
 .tbl-body {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
     background-color: rgba(0,0,0,0.3);
 
     td {
@@ -227,7 +233,7 @@
 
 .wrapper-bottom-left {
   display: flex;
-  flex: 2;
+  flex: 3;
   align-content: space-between;
 
 
@@ -244,6 +250,9 @@
       margin: 0;
       font-size: 18px;
     }
+    .h1-date {
+        width: 100px;
+    }
     
     .card-text-times {
       div {
@@ -253,10 +262,58 @@
   }
 }
 
+.wrapper-bottom-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-content: space-between;
+    .card-wrapper {
+        justify-content: space-between;
+        flex: 1;
+    }
+    .card-text {
+        padding: 1rem 2rem;
+        color: white;
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+
 .card-text-times {
   display: flex;
 }
 
 .card-flight-price {
-    padding: 0 2rem;
+    padding: 1rem 2rem;
+    h1 {
+        padding: 0;
+        margin: 0;
+    }
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.fav-button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    background-color: rgba(0,0,0,0.0);
+    padding: 1rem 2rem;
+    border: 0px;
+    border-radius: 0.5rem;
+    color: white;
+    &:hover {
+        background-color: rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
 }
