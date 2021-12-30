@@ -20,6 +20,7 @@ class SoapController extends Controller
 
         return $array;
     }
+    
     public function timeDifference($departure_code, $arrival_code)
     {
         $soapclient = new SoapClient('https://dfs-timezone.herokuapp.com/SOAPTime.asmx');
