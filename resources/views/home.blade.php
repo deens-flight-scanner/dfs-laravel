@@ -137,7 +137,7 @@
                             <h1 id="wrapper_flight_price">$$$</h1>
                         </div>
                     </div>
-                    <form id="form_add_favorite" method="POST" action="http://dfs-laravel.herokuapp.com/api/favorites/">
+                    <form id="form_add_favorite" method="POST" action="http://dfs-laravel.herokuapp.com/api/favorites">
                         @csrf  
 
                         <div class="card-wrapper">
