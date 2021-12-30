@@ -60,7 +60,7 @@ $(document).ready(function () {
         return false;
     });
 
-    initMap();
+    // initMap();
 });
 
 function dateTransform(date_object) {
