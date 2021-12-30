@@ -5,7 +5,10 @@
 
 <link rel="stylesheet" href="/css/home.css">
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 <script src="js/home.js"></script>
 @stop
 
@@ -96,15 +99,12 @@
                 </div>
             </div>
             <div class="wrapper-middle">
-                <div class="card-wrapper">
-                    <div class="card-text">
-                        <h1>5º</h1>
-                        <p>Bergamo</p>
-                    </div>
-                    <div class="card-icon">
-                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
-                    </div>
-                </div>
+                <div id="map"></div>
+                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtZn4UcvwxLZzv55xOLUDwGy3arbyadLA&callback=initMap&v=weekly"
+                    async
+                ></script>
             </div>
             <div class="wrapper-bottom">
                 <div class="card-wrapper wrapper-bottom-left">

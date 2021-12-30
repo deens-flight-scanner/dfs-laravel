@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\SoapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUse
 Route::post('/favorites/', [FavoriteController::class, 'store']);
 
 Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+
+Route::get('/time/zone/{airport_code}', [SoapController::class, 'timeZone']);
+
+Route::get('/time/difference/{departure_code}/{arrival_code}', [SoapController::class, 'timeDifference']);
 
 // routes
 // Route::post('/favorites', [FavoriteController::class, 'store']);

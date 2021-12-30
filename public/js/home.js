@@ -59,6 +59,8 @@ $(document).ready(function () {
 
         return false;
     });
+
+    initMap();
 });
 
 function dateTransform(date_object) {
@@ -140,7 +142,11 @@ function showDetailsOfFlight(departure_airport, arrival_airport, airline, airlin
     
     showAirline(airline, airline_code);
 
-    showTimeAndDate(departure_date, return_date, departure_city, arrival_city);
+
+    initMap([42.365843, 37.756066], [-71.009625, -122.440175]);
+
+    showDate(departure_date, return_date, departure_city, arrival_city);
+    showTime(departure_airport, arrival_airport);
 
 
     $('#wrapper_flight_price').html('$' + price);
@@ -182,12 +188,85 @@ function showAirline(airline, airlineCode) {
     $("#wrapper_airline_icon").attr("src","https://content.r9cdn.net/rimg/provider-logos/airlines/v/" + airlineCode + ".png?crop=false&width=50&height=50&fallback=default3.png&_v=be703666bbd51cff10e0564857e14808");
 }
 
-function showTimeAndDate(departure_date, return_date, departure_airport, arrival_airport) {
+function showDate(departure_date, return_date, departure_airport, arrival_airport) {
     $('#wrapper_date_departure').html(departure_date);
     $('#wrapper_date_return').html(return_date);
 
     $('#wrapper_airport_departure').html(departure_airport);
     $('#wrapper_airport_arrival').html(arrival_airport);
+}
+
+function showTime(departure_airport, arrival_airport) {
+    fetch("/api/time/zone/" + departure_airport)
+        .then(response => {
+            if (response.ok) return response.json();
+            else return Promise.reject(response);
+        })
+        .then(showHomeTime)
+        .catch(err => {
+            alert(err);
+    });
+    fetch("/api/time/zone/" + arrival_airport)
+        .then(response => {
+            if (response.ok) return response.json();
+            else return Promise.reject(response);
+        })
+        .then(showAwayTime)
+        .catch(err => {
+            alert(err);
+    });
+    fetch("/api/time/difference/" + departure_airport + "/" + arrival_airport)
+        .then(response => {
+            if (response.ok) return response.json();
+            else return Promise.reject(response);
+        })
+        .then(showTimeDifference)
+        .catch(err => {
+            alert(err);
+    });
+}
+
+function showHomeTime(data) {
+    var time = data.createTimeObjectResult;
+    
+    var hh = time.Hour.toString();
+    hh = hh.length == 1 ? '0' + hh : hh;
+    var mm = time.Minutes.toString();
+    mm = mm.length == 1 ? '0' + mm : mm;
+
+    var hour_string = hh + ':' + mm;
+    $('#wrapper_time_home').html(hour_string);
+}
+
+function showAwayTime(data) {
+    var time = data.createTimeObjectResult;
+    
+    var hh = time.Hour.toString();
+    hh = hh.length == 1 ? '0' + hh : hh;
+    var mm = time.Minutes.toString();
+    mm = mm.length == 1 ? '0' + mm : mm;
+
+    var hour_string = hh + ':' + mm;
+    $('#wrapper_time_away').html(hour_string);
+}
+
+function showTimeDifference(data) {
+    var utc_offset = data.timeDifferenceResult;
+
+    var hh = parseInt(utc_offset);
+    var min_offset = utc_offset - hh;
+    if (min_offset == 0.5) {
+        var mm = 30;
+    } else {
+        var mm = 0;
+    }
+
+    hh = hh.toString().length == 1 ? '0' + hh : hh;
+    mm = mm.toString().length == 1 ? '0' + mm : mm;
+
+    var hour_string = hh + ':' + mm;
+
+    $('#wrapper_time_difference').html(hour_string);
 }
 
 function searchDepartureAirports(name) {
@@ -229,3 +308,45 @@ function setDepartureAirport(airport) {
     document.getElementById('departure-input').value = airport;
 }
 
+// This example requires the Places library. Include the libraries=places
+function initMap() {
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 3,
+      center: {
+        lat: 41.871314,
+        lng: -99.869580
+      },
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    });
+  
+    var Lat = [42.365843, 37.756066];
+    var Lng = [-71.009625, -122.440175];
+  
+    var lineSymbol = {
+      path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+    };
+  
+    var Poly = new Array();
+    for (var i = 0; i < Lat.length; i++) {
+      var pos = new google.maps.LatLng(Lat[i], Lng[i]);
+      Poly.push(pos);
+    }
+    for (var j = 0; j < Poly.length; j++) {
+      if (j % 2 == 0) {
+        var poly = Poly.slice(j, j + 2);
+        var flowline = new google.maps.Polyline({
+          map: map,
+          path: poly,
+          geodesic: true,
+          strokeColor: "#DC143C",
+          strokeOpacity: .8,
+          strokeWeight: 2,
+          icons: [{
+            icon: lineSymbol,
+            offset: '100%'
+          }],
+        });
+      }
+    };
+  }

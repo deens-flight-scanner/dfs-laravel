@@ -73,17 +73,6 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper-middle">
-                <div class="card-wrapper">
-                    <div class="card-text">
-                        <h1>5º</h1>
-                        <p>Bergamo</p>
-                    </div>
-                    <div class="card-icon">
-                        <img src="http://openweathermap.org/img/wn/10d@4x.png">
-                    </div>
-                </div>
-            </div>
             <div class="wrapper-bottom">
                 <div class="card-wrapper wrapper-bottom-left">
                     <div class="card-text">

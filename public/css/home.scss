@@ -208,6 +208,11 @@
     }
 }
 
+.wrapper-middle {
+    height: 22rem;
+    padding: 0.5rem;
+}
+
 .wrapper-bottom {
     display: flex;
     justify-content: space-between;
@@ -316,4 +321,8 @@
         background-color: rgba(0,0,0,0.2);
         cursor: pointer;
     }
+}
+
+#map {
+    height: 100%;
 }

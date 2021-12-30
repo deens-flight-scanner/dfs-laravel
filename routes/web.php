@@ -35,5 +35,5 @@ Route::get('home', [AirportController::class, 'home']);
 Route::get('favorite', [FavoriteController::class, 'home'])->middleware(['auth'])->name('favorite');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
