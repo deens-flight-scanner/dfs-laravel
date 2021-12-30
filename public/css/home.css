@@ -267,6 +267,11 @@
   width: 50px;
 }
 
+.wrapper-middle {
+  height: 22rem;
+  padding: 0.5rem;
+}
+
 .wrapper-bottom {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -408,5 +413,9 @@
 .fav-button:hover {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+
+#map {
+  height: 100%;
 }
 /*# sourceMappingURL=home.css.map */

@@ -59,8 +59,6 @@ $(document).ready(function () {
 
         return false;
     });
-
-    // initMap();
 });
 
 function dateTransform(date_object) {
@@ -95,7 +93,7 @@ function showFlightsInTable(data) {
         var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
 
         if ($(".container-right")[0]) {
-            tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
+            tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\", " + origin['latitude'] + ", " + origin['longitude'] + ", " + destination['airport']['latitude'] + ", " + destination['airport']['longitude'] + ")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
         } else {
             tableHTML = tableHTML + "<tr><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
         }
@@ -105,7 +103,7 @@ function showFlightsInTable(data) {
     $('#table_flights_body').html(tableHTML);
 }
 
-function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price) {
+function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price, departure_lat, departure_lng, arrival_lat, arrival_lng) {
     $('#favorite_departure_airport').val(departure_airport);
     $('#favorite_departure_city').val(departure_city);
     $('#favorite_departure_date').val(departure_date);
@@ -143,7 +141,7 @@ function showDetailsOfFlight(departure_airport, arrival_airport, airline, airlin
     showAirline(airline, airline_code);
 
 
-    initMap([42.365843, 37.756066], [-71.009625, -122.440175]);
+    initMap([departure_lat, arrival_lat], [departure_lng, arrival_lng]);
 
     showDate(departure_date, return_date, departure_city, arrival_city);
     showTime(departure_airport, arrival_airport);
@@ -309,19 +307,30 @@ function setDepartureAirport(airport) {
 }
 
 // This example requires the Places library. Include the libraries=places
-function initMap() {
+function initMap(lats = [0], lngs = [0]) {
+    var lat_total = 0;
+    for(var i = 0; i < lats.length; i++) {
+        lat_total += lats[i];
+    }
+    var lat_avg = lat_total / lats.length;
+
+    var lng_total = 0;
+    for(var i = 0; i < lngs.length; i++) {
+        lng_total += lngs[i];
+    }
+    var lng_avg = lng_total / lngs.length;
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 3,
       center: {
-        lat: 41.871314,
-        lng: -99.869580
+        lat: lat_avg,
+        lng: lng_avg
       },
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
   
-    var Lat = [42.365843, 37.756066];
-    var Lng = [-71.009625, -122.440175];
+    var Lat = lats;
+    var Lng = lngs;
   
     var lineSymbol = {
       path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
