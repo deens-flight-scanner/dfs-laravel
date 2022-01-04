@@ -64,8 +64,7 @@ return [
 
     
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', implode(',', [
-        'localhost',
-        'localhost:8000',
+        'https://dfs-laravel.herokuapp.com',
     ]))),
 
 ];
