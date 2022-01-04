@@ -14,6 +14,9 @@ $(document).ready(function () {
         $.ajax({
             type: 'DELETE',
             url: $(this).attr( 'action' ),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(data){
                 var message = data['message'];
                 if (message != 'Favorite deleted') {
@@ -21,6 +24,29 @@ $(document).ready(function () {
                 } else {
                     location.reload();
                     alert('Flight removed from favorites');
+                }
+            }
+        });
+
+        return false;
+    });
+
+    $("#form_delete_expired").submit(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $.ajax({
+            type: 'DELETE',
+            url: $(this).attr( 'action' ),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                var message = data['message'];
+                if (message != 'Expired favorites deleted') {
+                    alert(message);
+                } else {
+                    location.reload();
+                    alert('Expired flights removed from favorites');
                 }
             }
         });

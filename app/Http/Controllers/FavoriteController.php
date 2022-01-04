@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\FavoriteResource;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class FavoriteController extends Controller
 {
@@ -58,7 +59,7 @@ class FavoriteController extends Controller
             'departure_date' => 'required',
             'arrival_airport' => 'required',
             'arrival_city' => 'required',
-            'arrival_date' => 'required',
+            'return_date' => 'required',
             'price' => 'required',
         ]);
 
@@ -73,7 +74,7 @@ class FavoriteController extends Controller
                                 ->where('departure_date', '=', $request->departure_date)
                                 ->where('arrival_airport', '=', $request->arrival_airport)
                                 ->where('arrival_city', '=', $request->arrival_city)
-                                ->where('arrival_date', '=', $request->arrival_date)
+                                ->where('return_date', '=', $request->return_date)
                                 ->where('price', '=', $request->price)
                                 ->where('airline', '=', $request->airline)
                                 ->where('airline_code', '=', $request->airline_code)
@@ -130,7 +131,7 @@ class FavoriteController extends Controller
 
         $favorite->update($request->all());
 
-        return response([ 'favorite' => new 
+        return response(['favorite' => new 
             FavoriteResource($favorite), 'message' => 'Success'], 200);
     }
 
@@ -141,9 +142,22 @@ class FavoriteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
         Favorite::destroy($id);
         
         return response(['message' => 'Favorite deleted'], 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyExpired()
+    {   
+        Favorite::whereDate("departure_date" , "<" , Carbon::now()->toDateString())
+                    ->delete();
+        
+        return response(['message' => 'Expired favorites deleted'], 200);
     }
 }

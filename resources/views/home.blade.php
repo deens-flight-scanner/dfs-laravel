@@ -148,7 +148,7 @@
                             <input type="text" style="display: none" name="departure_date" id="favorite_departure_date">
                             <input type="text" style="display: none" name="arrival_airport" id="favorite_arrival_airport">
                             <input type="text" style="display: none" name="arrival_city" id="favorite_arrival_city">
-                            <input type="text" style="display: none" name="arrival_date" id="favorite_arrival_date">
+                            <input type="text" style="display: none" name="return_date" id="favorite_return_date">
                             <input type="number" style="display: none" name="price" id="favorite_price">
                             <input type="text" style="display: none" name="airline" id="favorite_airline">
                             <input type="text" style="display: none" name="airline_code" id="favorite_airline_code">

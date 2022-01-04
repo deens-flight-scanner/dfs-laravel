@@ -18,12 +18,13 @@ class CreateFavoritesTable extends Migration
             $table->integer("user_id");
             $table->text("departure_airport");
             $table->text("departure_city");
-            $table->text("departure_date");
+            $table->date("departure_date");
             $table->text("arrival_airport");
             $table->text("arrival_city");
-            $table->text("arrival_date");
+            $table->date("return_date");
             $table->double("price");
             $table->text("airline")->nullable();
+            $table->text("airline_code")->nullable();
             $table->timestamps();
         });
     }

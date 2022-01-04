@@ -21,7 +21,7 @@ class Favorite extends Model
         'departure_date',
         'arrival_airport',
         'arrival_city',
-        'arrival_date',
+        'return_date',
         'price',
         'airline',
         'airline_code',

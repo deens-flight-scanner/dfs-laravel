@@ -31,9 +31,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $user = Auth::guard('web')->user();
-        $token = $user->createToken('API Token')->accessToken;
+        $token = $user->createToken('token-name');
 
-        error_log($token);
+        error_log($token->plainTextToken);
 
         $request->session()->regenerate();
 

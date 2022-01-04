@@ -7,6 +7,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="js/favorite.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @stop
 
 @section("body-content")
@@ -26,17 +27,23 @@
                 </thead>
                 <tbody class="tbl-body" id="table_flights_body">
                     @foreach ($favorites as $favorite)
-                        <tr onclick="showDetailsOfFlight('{{ $favorite->departure_airport }}', '{{ $favorite->arrival_airport }}', '{{ $favorite->airline }}', '{{ $favorite->airline_code }}', '{{ $favorite->departure_date }}', '{{ $favorite->arrival_date }}', '{{ $favorite->departure_city }}', '{{ $favorite->arrival_city }}', '{{ $favorite->price}}', '{{ $favorite->id }}')">
+                        <tr onclick="showDetailsOfFlight('{{ $favorite->departure_airport }}', '{{ $favorite->arrival_airport }}', '{{ $favorite->airline }}', '{{ $favorite->airline_code }}', '{{ $favorite->departure_date }}', '{{ $favorite->return_date }}', '{{ $favorite->departure_city }}', '{{ $favorite->arrival_city }}', '{{ $favorite->price}}', '{{ $favorite->id }}')">
                             <td>{{ $favorite->departure_city }}</td>
                             <td>{{ $favorite->arrival_city }}</td>
                             <td>${{ $favorite->price }}</td>
                             <td>{{ $favorite->departure_date }}</td>
-                            <td>{{ $favorite->arrival_date }}</td>
+                            <td>{{ $favorite->return_date }}</td>
                             <td>{{ $favorite->airline }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <form id="form_delete_expired" method="POST" action="/api/favorites/expired">
+                @method('DELETE')
+                @csrf
+
+                <input type="submit" class="exp-button" id="btn_delete_expired" value="Remove expired">
+            </form>
         </div>
 
         <div class="container-right" id="container_right">

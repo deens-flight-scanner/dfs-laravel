@@ -32,6 +32,7 @@ thead th, tbody td {
   border: 2px;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
 .tbl-header {
@@ -69,7 +70,7 @@ thead th, tbody td {
   cursor: pointer;
 }
 
-.tbl-button {
+.exp-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -83,7 +84,7 @@ thead th, tbody td {
   color: white;
 }
 
-.tbl-button:hover {
+.exp-button:hover {
   background-color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }

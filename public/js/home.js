@@ -88,9 +88,9 @@ function showFlightsInTable(data) {
     var tableHTML = '';
     destinations_sorted.forEach(destination => {
         var departd = destination['departd'];
-        var departure_date = departd.slice(6, 8) + '-' + departd.slice(4, 6) + '-' + departd.slice(0, 4);
+        var departure_date = departd.slice(0, 4) + '-' + departd.slice(4, 6) + '-' + departd.slice(6, 8);
         var returnd = destination['returnd'];
-        var return_date = returnd.slice(6, 8) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(0, 4);
+        var return_date = returnd.slice(0, 4) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(6, 8);
 
         if ($(".container-right")[0]) {
             tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\", " + origin['latitude'] + ", " + origin['longitude'] + ", " + destination['airport']['latitude'] + ", " + destination['airport']['longitude'] + ")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
@@ -109,7 +109,7 @@ function showDetailsOfFlight(departure_airport, arrival_airport, airline, airlin
     $('#favorite_departure_date').val(departure_date);
     $('#favorite_arrival_airport').val(arrival_airport);
     $('#favorite_arrival_city').val(arrival_city);
-    $('#favorite_arrival_date').val(return_date);
+    $('#favorite_return_date').val(return_date);
     $('#favorite_price').val(price);
     $('#favorite_airline').val(airline);
     $('#favorite_airline_code').val(airline_code);

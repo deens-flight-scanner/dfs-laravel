@@ -18,14 +18,13 @@ use App\Http\Controllers\SoapController;
 */
 
 // routes
-Route::group(['middleware' => ['auth:api']], function() {
-});
+Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID'])->middleware(['auth:sanctum']);
 
-Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID']);
+Route::post('/favorites/', [FavoriteController::class, 'store'])->middleware(['auth:sanctum']);
 
-Route::post('/favorites/', [FavoriteController::class, 'store']);
+Route::delete('/favorites/expired', [FavoriteController::class, 'destroyExpired'])->middleware(['auth:sanctum']);
 
-Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
+Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->middleware(['auth:sanctum']);
 
 
 Route::get('/time/zone/{airport_code}', [SoapController::class, 'timeZone']);

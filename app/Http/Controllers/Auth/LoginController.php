@@ -39,8 +39,10 @@ class LoginController extends Controller
         $authUser = $this->findOrCreateGitHubUser($user);
 
         Auth::login($authUser, true);
-        
-        auth()->user()->createToken('api-token');
+
+        $token = auth()->user()->createToken('token-name');
+
+        error_log($token->plainTextToken);
 
         return Redirect::to('home');
     }
@@ -85,7 +87,9 @@ class LoginController extends Controller
 
         Auth::login($authUser, true);
         
-        auth()->user()->createToken('api-token');
+        $token = auth()->user()->createToken('token-name');
+
+        error_log($token->plainTextToken);
 
         return Redirect::to('home');
     }

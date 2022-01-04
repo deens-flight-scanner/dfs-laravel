@@ -26,7 +26,7 @@ class FavoriteSeeder extends Seeder
                 'departure_date' => $faker->date,
                 'arrival_airport' => Str::random(3),
                 'arrival_city' => $faker->city,
-                'arrival_date' => $faker->date,
+                'return_date' => $faker->date,
                 'price' => rand(0,1000),
                 'airline' => '',
                 'airline_code' => '',
