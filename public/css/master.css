@@ -23,6 +23,22 @@ body {
   font-weight: bold;
 }
 
+.menu-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+}
+
+.menu-user p {
+  padding: 0 1rem;
+}
+
+.menu-user img {
+  margin: auto;
+  border-radius: 1rem;
+}
+
 .menu-browse {
   display: -webkit-box;
   display: -ms-flexbox;

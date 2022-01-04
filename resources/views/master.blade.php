@@ -16,9 +16,15 @@ and open the template in the editor.
             <div class="menu-title">
                 <p>Deans Flight Scanner</p>
             </div>
+            @auth
+            <div class="menu-user">
+                @if (Auth::user()->avatar != null)
+                    <img src="{{ Auth::user()->avatar }}" width="40" height="40">
+                @endif
+                <p>{{ Auth::user()->name }}</p>
+            </div>
             <div class="menu-browse">
                 <p><a href="/home">Home</a></p>
-                @auth
 
                 <p><a href="/favorite">Favorites</a></p>
 
@@ -31,16 +37,16 @@ and open the template in the editor.
                         {{ __('Log out') }}
                     </a></p>
                 </form>
+            @else
+            <div class="menu-browse">
+                @if (Route::has('login'))
+                <p><a href="{{ route('login') }}">Log in</a></p>
+                @endif
 
-                @else
-                    @if (Route::has('login'))
-                    <p><a href="{{ route('login') }}">Log in</a></p>
-                    @endif
-
-                    @if (Route::has('register'))
-                    <p><a href="{{ route('register') }}">Register</a></p>
-                    @endif
-                </div>
+                @if (Route::has('register'))
+                <p><a href="{{ route('register') }}">Register</a></p>
+                @endif
+            </div>
             @endauth
             </div>
         </div>

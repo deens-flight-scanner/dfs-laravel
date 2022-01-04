@@ -22,6 +22,18 @@ body {
     }
 }
 
+.menu-user {
+    display: flex;
+    margin: auto;
+    p {
+        padding: 0 1rem;
+    }
+    img {
+        margin: auto;
+        border-radius: 1rem;
+    }
+}
+
 .menu-browse {
     display: flex;
     justify-content: space-between;
