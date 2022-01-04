@@ -19,7 +19,6 @@ use App\Http\Controllers\SoapController;
 
 // routes
 Route::group(['middleware' => ['auth:api']], function() {
-    Route::get('/time/zone/{airport_code}', [SoapController::class, 'timeZone']);
 });
 
 Route::get('/favorites/search/{user_id}', [FavoriteController::class, 'showByUserID']);
@@ -29,6 +28,7 @@ Route::post('/favorites/', [FavoriteController::class, 'store']);
 Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 
 
+Route::get('/time/zone/{airport_code}', [SoapController::class, 'timeZone']);
 
 Route::get('/time/difference/{departure_code}/{arrival_code}', [SoapController::class, 'timeDifference']);
 
