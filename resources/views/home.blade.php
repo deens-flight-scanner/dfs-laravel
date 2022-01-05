@@ -18,7 +18,7 @@
             <form class="container-form" action="">
                 <div class="form-row-one">
                     <div class="form-group form-group-from">
-                        <label for="name" class="form-label">From</label>
+                        <label for="name" class="form-label">From (*)</label>
                         <input type="text" class="form-input" placeholder="From" id="departure-input"/>
                     </div>
                     <div class="form-group">
@@ -149,7 +149,7 @@
                             <input type="text" style="display: none" name="arrival_airport" id="favorite_arrival_airport">
                             <input type="text" style="display: none" name="arrival_city" id="favorite_arrival_city">
                             <input type="text" style="display: none" name="return_date" id="favorite_return_date">
-                            <input type="number" style="display: none" name="price" id="favorite_price">
+                            <input type="number" style="display: none" name="price" id="favorite_price" step=0.01>
                             <input type="text" style="display: none" name="airline" id="favorite_airline">
                             <input type="text" style="display: none" name="airline_code" id="favorite_airline_code">
 
