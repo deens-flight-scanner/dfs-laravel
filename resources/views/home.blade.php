@@ -18,8 +18,8 @@
             <form class="container-form" action="">
                 <div class="form-row-one">
                     <div class="form-group form-group-from">
-                        <label for="name" class="form-label">From (*)</label>
-                        <input type="text" class="form-input" placeholder="From" id="departure-input"/>
+                        <label for="name" class="form-label">From</label>
+                        <input type="text" class="form-input" placeholder="From (*)" id="departure-input"/>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Price</label>
