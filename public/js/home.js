@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('.container-loading').hide();
+
     const departure_input = document.getElementById('departure-input');
     departure_input.addEventListener('input', () => searchDepartureAirports(departure_input.value));
 
@@ -26,12 +28,52 @@ $(document).ready(function () {
         }
 
         if (departure_airport.charAt(3) === ':') {
+            $('.container-loading').show();
             fetch("/api/flights/search/" + departure_airport.substring(0, 3) + "/" + budget + "/" + departure_date + "/" + return_date + "/" + exact_date)
             .then(response => {
                 if (response.ok) return response.json();
                 else return Promise.reject(response);
             })
             .then(showFlightsInTable)
+            .catch(err => {
+                alert(err);
+            });
+        } else {
+            alert('Please select an airport from the suggestions.')
+        }
+    };
+
+    document.getElementById('suprise-me-button').onclick = function(){
+        var departure_airport = document.getElementById('departure-input').value;
+        var budget = document.getElementById('budget-input').value;
+        var departure_date = document.getElementById('departure-date-input').value;
+        var return_date = document.getElementById('return-date-input').value;
+        var exact_date = document.getElementById('exact-date-input').checked;
+
+        if (budget == '') {
+            budget = 'none';
+        }
+
+        if (departure_date === '') {
+            departure_date = 'none';
+        } else {
+            departure_date = dateTransform(departure_date);
+        }
+
+        if (return_date === '') {
+            return_date = 'none';
+        } else {
+            return_date = dateTransform(return_date);
+        }
+
+        if (departure_airport.charAt(3) === ':') {
+            $('.container-loading').show();
+            fetch("/api/flights/search/" + departure_airport.substring(0, 3) + "/" + budget + "/" + departure_date + "/" + return_date + "/" + exact_date)
+            .then(response => {
+                if (response.ok) return response.json();
+                else return Promise.reject(response);
+            })
+            .then(showRandomFlight)
             .catch(err => {
                 alert(err);
             });
@@ -72,6 +114,34 @@ function dateTransform(date_object) {
     return yy + '' + mm + '' + dd;
 }
 
+function showRandomFlight(data) {
+    if (isEmpty(user)) {
+        alert('Please login or register to get a random flight.');
+        return;
+    }
+
+    var origin = data['origin'];
+    
+    var destinations = data['destinations'];
+
+    var destinations_filtered = destinations.filter(function(e) {
+        return e['flightInfo']['price'] !== 999999;
+    });
+
+    var destination = destinations_filtered[Math.floor(Math.random()*destinations_filtered.length)];
+
+    var departd = destination['departd'];
+    var departure_date = departd.slice(0, 4) + '-' + departd.slice(4, 6) + '-' + departd.slice(6, 8);
+    var returnd = destination['returnd'];
+    var return_date = returnd.slice(0, 4) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(6, 8);
+
+    $('.container-loading').hide();
+    
+    $('.tbl').hide();
+    
+    showDetailsOfFlight(destination['originAirportShortName'], destination['airport']['shortName'], destination['airline'], destination['airlineCode'], departure_date, return_date, origin['cityName'], destination['city']['name'], destination['flightInfo']['price'], origin['latitude'], origin['longitude'], destination['airport']['latitude'], destination['airport']['longitude']);
+}
+
 function showFlightsInTable(data) {
     var origin = data['origin'];
     
@@ -92,18 +162,23 @@ function showFlightsInTable(data) {
         var returnd = destination['returnd'];
         var return_date = returnd.slice(0, 4) + '-' + returnd.slice(4, 6) + '-' + returnd.slice(6, 8);
 
-        if ($(".container-right")[0]) {
-            tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\", " + origin['latitude'] + ", " + origin['longitude'] + ", " + destination['airport']['latitude'] + ", " + destination['airport']['longitude'] + ")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
-        } else {
-            tableHTML = tableHTML + "<tr><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
-        }
-        
+        tableHTML = tableHTML + "<tr onclick='showDetailsOfFlight(\"" + destination['originAirportShortName'] + "\", \"" + destination['airport']['shortName'] + "\", \"" + destination['airline'] + "\", \"" + destination['airlineCode'] + "\", \"" + departure_date + "\", \"" + return_date + "\", \"" + origin['cityName'] + "\", \"" + destination['city']['name'] + "\", \"" + destination['flightInfo']['price'] + "\", " + origin['latitude'] + ", " + origin['longitude'] + ", " + destination['airport']['latitude'] + ", " + destination['airport']['longitude'] + ")'><td> " + origin['cityName'] + " </td><td> " + destination['city']['name'] + " </td><td> $" + destination['flightInfo']['price'] + " </td><td> " + departure_date + " </td><td> " + return_date + " </td></tr>";
     });
+
+    $('.container-loading').hide();
+
     $('.tbl').show();
     $('#table_flights_body').html(tableHTML);
+
+    $('#container_right').hide();
 }
 
 function showDetailsOfFlight(departure_airport, arrival_airport, airline, airline_code, departure_date, return_date, departure_city, arrival_city, price, departure_lat, departure_lng, arrival_lat, arrival_lng) {
+    if (isEmpty(user)) {
+        alert('Please login or register to see the flight details.');
+        return;
+    }
+    
     $('#favorite_departure_airport').val(departure_airport);
     $('#favorite_departure_city').val(departure_city);
     $('#favorite_departure_date').val(departure_date);
@@ -358,4 +433,8 @@ function initMap(lats = [0], lngs = [0]) {
         });
       }
     };
-  }
+}
+
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}

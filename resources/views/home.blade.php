@@ -1,27 +1,38 @@
 @extends("master")
 
 @section("head-content")
-<title>Dean's Flight Scanner - Home</title>
+    <title>Dean's Flight Scanner - Home</title>
 
-<link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script>
+        var user = {!! json_encode((array)auth()->user()) !!};
+    </script>
 
-<script src="js/home.js"></script>
+    <script src="js/home.js"></script>
 @stop
 
 @section("body-content")
+    <div class="container-loading">
+        <div class="loading-screen">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+        </div>
+    </div>
     <div class="container-content">
         <div class="container-left">
             <form class="container-form" action="">
                 <div class="form-row-one">
-                    <div class="form-group form-group-from">
+                    <div data-tip="Your departure airport (*)" class="form-group form-group-from">
                         <label for="name" class="form-label">From</label>
                         <input type="text" class="form-input" placeholder="From (*)" id="departure-input"/>
                     </div>
-                    <div class="form-group">
+                    <div data-tip="The maximum price for the flight" class="form-group">
                         <label for="name" class="form-label">Price</label>
                         <input type="text" class="form-input" placeholder="Price" id="budget-input"/>
                     </div>
@@ -29,20 +40,25 @@
                     
                 <div class="form-input-suggestion" id="departure-suggestions"></div>
                 <div class="form-row-two">
-                    <div class="form-group">
-                    <label for="name" class="form-label">Departure</label>
-                    <input type="date" class="form-input" id="departure-date-input"/>
+                    <div data-tip="The date you want to/can departure" class="form-group">
+                        <label for="name" class="form-label">Departure</label>
+                        <input type="date" class="form-input" id="departure-date-input"/>
                     </div>
-                    <div class="form-group">
-                    <label for="name" class="form-label">Return</label>
-                    <input type="date" class="form-input" id="return-date-input"/>
+                    <div data-tip="The date you want to/have to return" class="form-group">
+                        <label for="name" class="form-label">Return</label>
+                        <input type="date" class="form-input" id="return-date-input"/>
                     </div>  
-                    <div class="form-group">
-                    <label for="name" class="form-label">Exact dates</label>
-                    <input type="checkbox" class="form-input" id="exact-date-input"/>
+                    <div data-tip="Flight between dates or on specified dates" class="form-group">
+                        <label for="name" class="form-label">Exact dates</label>
+                        <input type="checkbox" class="form-input" id="exact-date-input"/>
                     </div>
                 </div>
-                <button class="form-button" type="button" id="search-flights-button">Search</button>
+                <div class="form-row-three">
+                    <button data-tip="Search for flights using the specified information" class="form-button search" type="button" id="search-flights-button">Search</button>
+                    <button data-tip="Search for random flight with specified information" class="form-button suprise" type="button" id="suprise-me-button">Suprise me</button>
+                    {{-- <button data-tip="The date you want to/can departure" class="form-button info" type="button" id="search-flights-button">Information</button> --}}
+                </div>
+                <p>Only inputs with (*) are mandatory</p>
             </form>
 
             <div class="container-tbl">
@@ -101,10 +117,12 @@
             <div class="wrapper-middle">
                 <div id="map"></div>
                 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                <script
+                {{-- <script
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtZn4UcvwxLZzv55xOLUDwGy3arbyadLA&callback=initMap&v=weekly"
-                    async
-                ></script>
+                    defer async
+                ></script> --}}
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtZn4UcvwxLZzv55xOLUDwGy3arbyadLA&callback=initMap"
+                    type="text/javascript"></script>
             </div>
             <div class="wrapper-bottom">
                 <div class="card-wrapper wrapper-bottom-left">

@@ -4,6 +4,64 @@
     margin: 2rem 0;
 }
 
+// -------------------- LOADING SCREEN -------------------- https://codepen.io/sudeepgumaste/pen/abdrorB
+
+.container-loading{
+    position:fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 20px rgba(0,0,0,0.3);
+}
+  
+.loading-screen{
+    height: 15px;
+    width: 105px;
+    display: flex;
+    position: relative;
+    .circle{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        opacity: 100%;
+        background-color: #fff;
+        animation: move 500ms linear 0ms infinite;
+        margin-right: 30px;
+        
+        &:first-child{
+            position: absolute;
+            top:0;
+            left:0;
+            animation: grow 500ms linear 0ms infinite;
+        }
+        
+        &:last-child{
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-right: 0;
+            animation: grow 500ms linear 0s infinite reverse;
+        }
+    }
+}
+  
+@keyframes grow {
+    from {transform: scale(0,0); opacity: 0;}
+    to {transform: scale(1,1); opacity: 1;}
+}
+
+@keyframes move {
+    from {transform: translateX(0px)}
+    to {transform: translateX(45px)}
+}
+
 // -------------------- CONTAINER LEFT --------------------
 .container-left {
     // background-color: blue;
@@ -11,9 +69,14 @@
     margin: 0 2rem;
 }
 
-// -------------------- FORM --------------------
+// -------------------- FORM -------------------- 
 .container-form {
     margin-bottom: 2rem;
+
+    p {
+        margin: 0.5rem;
+        font-size: small;
+    }
 }
 .form-row-one {
     display: flex;
@@ -23,6 +86,23 @@
 .form-row-two {
     display: flex;
     justify-content: space-between;
+}
+
+.form-row-three {
+    display: flex;
+    justify-content: space-between;
+
+    .search {
+        flex: 3;
+    }
+
+    .suprise {
+        flex: 3;
+    }
+
+    .info {
+        flex: 2;
+    }
 }
 
 .form-group {
@@ -84,7 +164,7 @@
     flex: 1;
     background-color: rgba(0,0,0,0.3);
     padding: 1rem;
-    margin: 0.5rem 0 0 0.5rem;
+    margin: 0.5rem;
     border: 0px;
     border-radius: 0.5rem;
     color: white;
@@ -92,8 +172,56 @@
         background-color: rgba(0,0,0,0.4);
         cursor: pointer;
     }
+    text-align: center;
 }
 
+
+// -------------------- DATA TIP -------------------- https://stackoverflow.com/questions/19480010/adding-a-tooltip-to-an-input-box
+
+[data-tip] {
+	position:relative;
+
+}
+[data-tip]:before {
+	content:'';
+	/* hides the tooltip when not hovered */
+	display:none;
+	content:'';
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #1a1a1a;	
+	position:absolute;
+	top:40px;
+	left:35px;
+	z-index:8;
+	font-size:0;
+	line-height:0;
+	width:0;
+	height:0;
+}
+[data-tip]:after {
+	display:none;
+	content:attr(data-tip);
+	position:absolute;
+	top:45px;
+	left:0px;
+	padding:5px 8px;
+	background:#1a1a1a;
+	color:#FDBB40;
+	z-index:9;
+	font-size: 0.75em;
+	height:fit-content;
+	line-height:18px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	white-space:nowrap;
+	word-wrap:normal;
+}
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+	display:block;
+}
 
 // -------------------- TABLE --------------------
 .container-tbl {
